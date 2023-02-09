@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\ProductResource;
-use App\Imports\ProductImport;
+use ErrorException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * ResellerCartController for API resource of reseller
@@ -40,7 +43,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate(['file' => 'required']);
-        Excel::import(new ProductImport, $request->file);
+        try{
+            Excel::import(new ProductImport, $request->file);
+        }catch(Exception $e){
+            throw new ErrorException('File is incorrect format');
+        }
+        
         return response()->json([
             "success" => true
         ], 200);
