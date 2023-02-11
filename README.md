@@ -20,3 +20,5 @@ DB_PASSWORD=
 ```
 
 -   Migrate database `php artisan migrate:fresh --seed`
+
+-   `php artisan serve`
