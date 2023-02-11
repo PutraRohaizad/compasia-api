@@ -12,7 +12,7 @@ use ErrorException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * ResellerCartController for API resource of reseller
+ * ProductController for API resource of product
  *
  * Available API endpoint action:-
  * * index -- [GET] /products
